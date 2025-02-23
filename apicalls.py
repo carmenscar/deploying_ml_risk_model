@@ -25,7 +25,7 @@ responses = {
     'diagnostics': response4.json()
 }
 #write the responses to your workspace
-with open('api_responses.json', 'w') as f:
+with open('apireturns.json', 'w') as f:
     json.dump(responses, f)
 
 print(responses)

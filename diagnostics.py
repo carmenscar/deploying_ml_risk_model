@@ -63,7 +63,7 @@ def execution_time():
     os.system('python ingestion.py')
     os.system('python training.py')
     timing=timeit.default_timer() - starttime
-    return print(timing)
+    return timing
 
 def missing_data():
     """
@@ -81,14 +81,21 @@ def missing_data():
 def outdated_packages_list():
     # Verificar pacotes desatualizados
     outdated = subprocess.check_output(['pip', 'list', '--outdated']).decode('utf-8')
-    for line in outdated.splitlines()[2:]:
+    packages_dict = {}
+    
+    # Processar a saída do comando pip
+    for line in outdated.splitlines()[2:]:  # Ignorar as duas primeiras linhas (cabeçalho)
         parts = line.split()
         if len(parts) >= 3:
             package = parts[0]
             installed_version = parts[1]
             latest_version = parts[2]
-            print(f"package | installed_version | latest_version")
-            print(f"{package} | {installed_version} | {latest_version}")
+            packages_dict[package] = {
+                'installed_version': installed_version,
+                'latest_version': latest_version
+            }
+    
+    return packages_dict
 
 if __name__ == '__main__':
     list_y_pred = model_predictions(model_path_file,test_data_path)

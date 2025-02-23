@@ -1,4 +1,3 @@
-#from flask import Flask, session, jsonify, request
 import pandas as pd
 import numpy as np
 import pickle
@@ -42,6 +41,7 @@ def train_model(dataset_path, model_path):
     model = lr_model.fit(X_train, y_train)
 
     #write the trained model to your workspace in a file called trainedmodel.pkl
+    os.makedirs(model_path, exist_ok=True)
     model_file_path = os.path.join(model_path, 'trainedmodel.pkl')
     with open(model_file_path, 'wb') as f:
         pickle.dump(model, f)

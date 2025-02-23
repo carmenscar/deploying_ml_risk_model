@@ -1,0 +1,1 @@
+*/10 * * * * python /home/carmenscar/deploying_ml_risk_model/fullprocess.py

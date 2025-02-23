@@ -3,7 +3,6 @@ import numpy as np
 import os
 import json
 import glob
-#from datetime import datetime
 
 with open('config.json','r') as f:
     config = json.load(f) 
